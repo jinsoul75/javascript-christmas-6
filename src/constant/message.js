@@ -1,5 +1,5 @@
 import formatAmount from '../util/formatAmount.js';
-import { AMOUNT, GIFT } from './constants.js';
+import { AMOUNT, BADGE, GIFT } from './constants.js';
 
 export const MESSAGE = {
   welcome: `안녕하세요! 우테코 식당 12월 이벤트 플래너입니다.`,
@@ -44,5 +44,5 @@ export const LIST = {
 
   totalBenefit: amount => `${amount > 0 ? '-' : ''}${formatAmount(amount)}원`,
 
-  expectAmount: amount => `${amount}원`
+  expectAmount: amount => `${amount}원`,
 };

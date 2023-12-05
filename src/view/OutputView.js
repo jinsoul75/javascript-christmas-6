@@ -38,6 +38,10 @@ const OutputView = {
     Console.print(HEADER.expectedAmount);
     Console.print(LIST.expectAmount(amount));
   },
+  printBadge(badge) {
+    Console.print(HEADER.badge);
+    Console.print(badge);
+  },
 };
 
 export default OutputView;

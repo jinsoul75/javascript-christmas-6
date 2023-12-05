@@ -3,6 +3,8 @@ import OutputView from '../view/OutputView.js';
 import Day from '../model/Day.js';
 import Menu from '../model/Menu.js';
 import Event from '../model/Event.js';
+import { BADGE } from '../constant/constants.js';
+import { MESSAGE } from '../constant/message.js';
 
 class EventPlannerController {
   #date;
@@ -28,12 +30,26 @@ class EventPlannerController {
     OutputView.printDateEvent(menu.getTotalOrderAmount(), this.#getEvent(menu));
     OutputView.printTotalBenefitAmount(this.#event.getTotalBenefitAmount());
     OutputView.printExpectAmount(this.#event.getExpectAmount());
+    OutputView.printBadge(this.#getBadge(this.#event.getTotalBenefitAmount()));
   }
 
   #getEvent(menu) {
     this.#event = new Event(this.#date, menu);
 
     return this.#event.getBenefit();
+  }
+
+  #getBadge(benefitAmount) {
+    if (benefitAmount < BADGE.star.price) {
+      return MESSAGE.nothing;
+    }
+    if (benefitAmount < BADGE.tree.price) {
+      return BADGE.star.name;
+    }
+    if (benefitAmount < BADGE.santa.price) {
+      return BADGE.tree.name;
+    }
+    return BADGE.santa.name;
   }
 
   async retryHandler(callback) {

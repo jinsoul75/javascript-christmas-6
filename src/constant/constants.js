@@ -34,3 +34,9 @@ export const EVENT = {
   special: '특별 할인',
   gift: '증정 이벤트',
 };
+
+export const BADGE = {
+  star: { price: 5000, name: '별' },
+  tree: { price: 10000, name: '트리' },
+  santa: { price: 20000, name: '산타' },
+};
