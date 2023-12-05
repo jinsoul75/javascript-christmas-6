@@ -8,9 +8,11 @@ export const MESSAGE = {
 };
 
 export const HEADER = {
-  orderMenu: `\n<주문 메뉴>`,
+  orderMenu: '\n<주문 메뉴>',
+  totalOrderAmount: '\n<할인 전 총주문 금액>',
 };
 
 export const LIST = {
   menu: (item, quantity) => `${item} ${quantity}개`,
+  totalOrderAmount: amount => `${amount} 원`,
 };

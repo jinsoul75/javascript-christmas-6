@@ -1,4 +1,5 @@
 import MenuValidator from '../validator/MenuValidator.js';
+import { MENU } from '../constant/menu.js';
 
 class Menu {
   #menu;
@@ -25,8 +26,16 @@ class Menu {
     return [...this.#item];
   }
 
-  getQuantitu() {
+  getQuantity() {
     return [...this.#quantity];
+  }
+
+  getTotalOrderAmount() {
+    const totalOrderAmount = this.#menu.reduce(
+      (acc, cur) => acc + MENU[cur[0]].price * cur[1],
+      0,
+    );
+    return totalOrderAmount;
   }
 }
 
