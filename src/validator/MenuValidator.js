@@ -11,10 +11,12 @@ const MenuValidator = {
 
   validteItem(item) {
     this.checkValidMenu(item);
+    this.checkCategory(item);
   },
 
   validateQuantity(quantity) {
     this.checkHasNotInRange(quantity);
+    this.checkTotalQuantity(quantity);
   },
 
   checkValidMenu(item) {
@@ -27,12 +29,27 @@ const MenuValidator = {
     }
   },
 
+  checkCategory(item) {
+    const isOnlyDrink = menu => MENU[menu].category === 'drink';
+
+    if (item.every(isOnlyDrink)) {
+      throw new CustomError(ERROR.onlyDrink);
+    }
+  },
+
   checkHasNotInRange(quantity) {
     quantity.forEach(number => {
       if (this.isNotInRage(number)) {
         throw new CustomError(ERROR.inValidMenu);
       }
     });
+  },
+
+  checkTotalQuantity(quantity) {
+    const totalQuantity = quantity.reduce((sum, number) => sum + number);
+    if (totalQuantity > ORDER_QUANTITY.max) {
+      throw new CustomError(ERROR.overQuantity);
+    }
   },
 
   isNotInRage: number =>
