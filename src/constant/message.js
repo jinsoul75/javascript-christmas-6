@@ -38,9 +38,11 @@ export const LIST = {
       : `${MESSAGE.nothing}`,
 
   event: (totalOrderAmount, event) =>
-    totalOrderAmount >= AMOUNT.minEventAmount || event.length === 0
+    totalOrderAmount >= AMOUNT.minEventAmount && event.length !== 0
       ? `${event[0]}: -${formatAmount(event[1])}원`
       : MESSAGE.nothing,
 
-  amount: amount => `${amount > 0 ? '-' : ''}${formatAmount(amount)} 원`,
+  totalBenefit: amount => `${amount > 0 ? '-' : ''}${formatAmount(amount)}원`,
+
+  expectAmount: amount => `${amount}원`
 };

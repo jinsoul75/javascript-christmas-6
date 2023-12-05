@@ -32,7 +32,11 @@ const OutputView = {
   },
   printTotalBenefitAmount(amount) {
     Console.print(HEADER.totalBenefitAmount);
-    Console.print(LIST.amount(amount));
+    Console.print(LIST.totalBenefit(amount));
+  },
+  printExpectAmount(amount) {
+    Console.print(HEADER.expectedAmount);
+    Console.print(LIST.expectAmount(amount));
   },
 };
 

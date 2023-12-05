@@ -73,6 +73,14 @@ class Event {
 
     return totalBenefitAmount;
   }
+
+  getExpectAmount() {
+    if (this.#menu.getTotalOrderAmount() >= AMOUNT.minGiftAmount) {
+      return this.getTotalBenefitAmount() - AMOUNT.giftEvent;
+    }
+
+    return this.getTotalBenefitAmount();
+  }
 }
 
 export default Event;

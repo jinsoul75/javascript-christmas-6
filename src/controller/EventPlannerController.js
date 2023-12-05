@@ -27,6 +27,7 @@ class EventPlannerController {
     OutputView.printGiftMenu(menu.getTotalOrderAmount());
     OutputView.printDateEvent(menu.getTotalOrderAmount(), this.#getEvent(menu));
     OutputView.printTotalBenefitAmount(this.#event.getTotalBenefitAmount());
+    OutputView.printExpectAmount(this.#event.getExpectAmount());
   }
 
   #getEvent(menu) {
