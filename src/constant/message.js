@@ -37,10 +37,7 @@ export const LIST = {
       ? `${GIFT.item} ${GIFT.quantity}개`
       : `${MESSAGE.nothing}`,
 
-  event: (totalOrderAmount, event) =>
-    totalOrderAmount >= AMOUNT.minEventAmount && event.length !== 0
-      ? `${event[0]}: -${formatAmount(event[1])}원`
-      : MESSAGE.nothing,
+  event: event => `${event[0]}: -${formatAmount(event[1])}원`,
 
   totalBenefit: amount => `${amount > 0 ? '-' : ''}${formatAmount(amount)}원`,
 

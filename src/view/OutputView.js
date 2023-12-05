@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { HEADER, LIST, MESSAGE } from '../constant/message.js';
+import { AMOUNT } from '../constant/constants.js';
 
 const OutputView = {
   printError(message) {
@@ -28,7 +29,11 @@ const OutputView = {
   },
   printDateEvent(totalOrderAmount, events) {
     Console.print(HEADER.benefit);
-    events.forEach(event => Console.print(LIST.event(totalOrderAmount, event)));
+    if (totalOrderAmount < AMOUNT.minEventAmount || events.length === 0) {
+      Console.print(MESSAGE.nothing);
+      return;
+    }
+    events.forEach(event => Console.print(LIST.event(event)));
   },
   printTotalBenefitAmount(amount) {
     Console.print(HEADER.totalBenefitAmount);

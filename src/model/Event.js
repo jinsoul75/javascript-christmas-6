@@ -14,7 +14,7 @@ class Event {
 
   getBenefit() {
     this.#event = [];
-
+    
     if (this.#date.isBeforeChristmas()) {
       this.#event.push(this.#getChristmasEvent());
     }
