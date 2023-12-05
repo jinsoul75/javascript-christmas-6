@@ -8,7 +8,8 @@ class Day {
   }
 
   getDate() {
-    return this.#date;
+    const date = this.#date;
+    return date;
   }
 }
 

@@ -7,4 +7,10 @@ export const MESSAGE = {
     `12월 ${date}일에 우테코 식당에서 받을 이벤트 혜택 미리 보기!`,
 };
 
-export const HEADER = {};
+export const HEADER = {
+  orderMenu: `\n<주문 메뉴>`,
+};
+
+export const LIST = {
+  menu: (item, quantity) => `${item} ${quantity}개`,
+};

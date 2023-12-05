@@ -11,7 +11,13 @@ class EventPlannerController {
   async startPlan() {
     const date = await this.retryHandler(() => this.#getDate());
     const menu = await this.retryHandler(() => this.#getMenu());
+
+    this.#getBenefit(date, menu);
+  }
+
+  #getBenefit(date, menu) {
     OutputView.printEventHeader(date);
+    OutputView.printOrderMenu(menu.getMenu());
   }
 
   async retryHandler(callback) {
