@@ -30,6 +30,10 @@ const OutputView = {
     Console.print(HEADER.benefit);
     events.forEach(event => Console.print(LIST.event(totalOrderAmount, event)));
   },
+  printTotalBenefitAmount(amount) {
+    Console.print(HEADER.totalBenefitAmount);
+    Console.print(LIST.amount(amount));
+  },
 };
 
 export default OutputView;

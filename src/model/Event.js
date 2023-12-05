@@ -31,7 +31,7 @@ class Event {
       this.#event.push(this.#getSpecialEvent());
     }
 
-    if (this.#menu.getTotalOrderAmount() >= AMOUNT.minEventAmount) {
+    if (this.#menu.getTotalOrderAmount() >= AMOUNT.minGiftAmount) {
       this.#event.push([EVENT.gift, AMOUNT.giftEvent]);
     }
 
@@ -64,5 +64,15 @@ class Event {
 
     return [EVENT.special, discountAmount];
   }
+
+  getTotalBenefitAmount() {
+    const totalBenefitAmount = this.#event.reduce(
+      (sumAmount, event) => sumAmount + event[1],
+      0,
+    );
+
+    return totalBenefitAmount;
+  }
 }
+
 export default Event;

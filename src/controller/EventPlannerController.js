@@ -7,6 +7,8 @@ import Event from '../model/Event.js';
 class EventPlannerController {
   #date;
 
+  #event;
+
   constructor() {
     OutputView.printWelcome();
   }
@@ -23,16 +25,14 @@ class EventPlannerController {
     OutputView.printOrderMenu(menu.getMenu());
     OutputView.printTotalOrderAmount(menu.getTotalOrderAmount());
     OutputView.printGiftMenu(menu.getTotalOrderAmount());
-    OutputView.printDateEvent(
-      menu.getTotalOrderAmount(),
-      this.#getDateEvent(menu),
-    );
+    OutputView.printDateEvent(menu.getTotalOrderAmount(), this.#getEvent(menu));
+    OutputView.printTotalBenefitAmount(this.#event.getTotalBenefitAmount());
   }
 
-  #getDateEvent(menu) {
-    const event = new Event(this.#date, menu);
+  #getEvent(menu) {
+    this.#event = new Event(this.#date, menu);
 
-    return event.getBenefit();
+    return this.#event.getBenefit();
   }
 
   async retryHandler(callback) {

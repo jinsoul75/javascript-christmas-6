@@ -41,4 +41,6 @@ export const LIST = {
     totalOrderAmount >= AMOUNT.minEventAmount || event.length === 0
       ? `${event[0]}: -${formatAmount(event[1])}원`
       : MESSAGE.nothing,
+
+  amount: amount => `${amount > 0 ? '-' : ''}${formatAmount(amount)} 원`,
 };
