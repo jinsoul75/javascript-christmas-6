@@ -1,6 +1,6 @@
 import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
-import Date from '../model/Date.js';
+import Day from '../model/Day.js';
 import Menu from '../model/Menu.js';
 
 class EventPlannerController {
@@ -11,6 +11,7 @@ class EventPlannerController {
   async startPlan() {
     const date = await this.retryHandler(() => this.#getDate());
     const menu = await this.retryHandler(() => this.#getMenu());
+    OutputView.printEventHeader(date);
   }
 
   async retryHandler(callback) {
@@ -25,7 +26,7 @@ class EventPlannerController {
   async #getDate() {
     const date = await InputView.readDate();
 
-    return new Date(date);
+    return date;
   }
 
   async #getMenu() {
