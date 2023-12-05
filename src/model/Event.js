@@ -1,4 +1,4 @@
-import { AMOUNT } from '../constant/constants';
+import { AMOUNT, EVENT } from '../constant/constants.js';
 
 class Event {
   #date;
@@ -9,15 +9,23 @@ class Event {
     this.#date = date;
   }
 
-  getEvent() {
-    const christmasdDay = this.#getChristmasdDay();
-    return { christmasdDay };
+  getBenefit() {
+    this.#event = [];
+
+    if (this.#date.isBeforeChristmas()) {
+      this.#event.push(this.#getChristmasEvent());
+    }
+
+    return [...this.#event];
   }
 
-  #getChristmasdDay() {
-    const dDay = this.#date.countChristmasdDay();
-    return AMOUNT.standarddDayEvent + AMOUNT.dDayEvent * dDay;
+  #getChristmasEvent() {
+    const dDay = this.#date.countdDay();
+
+    const disCountAmount =
+      AMOUNT.standarddDayEvent + AMOUNT.dDayEventUnit * dDay;
+
+    return [EVENT.christmasdDay, disCountAmount];
   }
 }
-
 export default Event;

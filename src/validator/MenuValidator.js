@@ -5,19 +5,11 @@ import CustomError from '../util/CustomError.js';
 
 const MenuValidator = {
   validateMenu(item, quantity) {
-    this.validteItem(item);
-    this.validateQuantity(quantity);
-  },
-
-  validteItem(item) {
     this.checkValidMenu(item);
-    this.checkCategory(item);
-  },
-
-  validateQuantity(quantity) {
+    this.checkHasNotNumber(quantity);
+    this.checkOnlyDrink(item);
     this.checkHasNotInRange(quantity);
     this.checkTotalQuantity(quantity);
-    this.checkHasNotNumber(quantity);
   },
 
   checkValidMenu(item) {
@@ -30,11 +22,11 @@ const MenuValidator = {
     }
   },
 
-  checkCategory(item) {
+  checkOnlyDrink(item) {
     const isOnlyDrink = menu => MENU[menu].category === ERROR.notOnlyCategory;
 
     if (item.every(isOnlyDrink)) {
-      throw new CustomError(ERROR.inValidMenu);
+      throw new CustomError(ERROR.onlyDrink);
     }
   },
 

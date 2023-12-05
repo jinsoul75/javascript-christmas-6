@@ -31,5 +31,5 @@ export const LIST = {
     amount > AMOUNT.minGiftAmount
       ? `${GIFT.item} ${GIFT.quantity}개`
       : `${MESSAGE.nothing}`,
-  event: event => event,
+  event: (name, amount) => `${name}: -${formatAmount(amount)}원`,
 };

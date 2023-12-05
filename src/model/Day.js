@@ -7,11 +7,24 @@ class Day {
     this.#date = Number(date);
   }
 
-  countChristmasdDay() {
-    if (this.#date <= DATE.christmas) {
-      return DATE.min - this.#date;
-    }
-    return 0;
+  isBeforeChristmas() {
+    return this.#date <= DATE.christmas;
+  }
+
+  countdDay() {
+    return this.#date - DATE.min;
+  }
+
+  isWeekend() {
+    const fullDate = DATE.getFullDate(this.#date);
+
+    const day = new Date(fullDate);
+
+    return DATE.weekend.includes(day.getDay());
+  }
+
+  isSpecialDay() {
+    return DATE.specialDay.includes(this.#date);
   }
 }
 

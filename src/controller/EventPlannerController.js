@@ -2,6 +2,7 @@ import InputView from '../view/InputView.js';
 import OutputView from '../view/OutputView.js';
 import Day from '../model/Day.js';
 import Menu from '../model/Menu.js';
+import Event from '../model/Event.js';
 
 class EventPlannerController {
   #date;
@@ -27,7 +28,8 @@ class EventPlannerController {
 
   #getDateEvent() {
     const event = new Event(this.#date);
-    return event;
+
+    return event.getBenefit();
   }
 
   async retryHandler(callback) {

@@ -2,6 +2,9 @@ export const DATE = {
   min: 1,
   max: 31,
   christmas: 25,
+  getFullDate: day => `2023-12-${day}`,
+  weekend: [5, 6],
+  specialDay: [3, 10, 17, 24, 25, 31],
 };
 
 export const ORDER_QUANTITY = {
@@ -13,7 +16,7 @@ export const AMOUNT = {
   minEventAmount: 10000,
   minGiftAmount: 120000,
   standarddDayEvent: 1000,
-  dDayEvent: 100,
+  dDayEventUnit: 100,
 };
 
 export const GIFT = {
