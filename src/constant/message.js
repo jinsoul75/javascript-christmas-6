@@ -18,6 +18,7 @@ export const HEADER = {
   orderMenu: '\n<주문 메뉴>',
   totalOrderAmount: '\n<할인 전 총주문 금액>',
   giftMenu: '\n<증정 메뉴>',
+  benefit: '\n<혜택 내역>',
 };
 
 export const LIST = {
@@ -30,4 +31,5 @@ export const LIST = {
     amount > AMOUNT.minGiftAmount
       ? `${GIFT.item} ${GIFT.quantity}개`
       : `${MESSAGE.nothing}`,
+  event: event => event,
 };

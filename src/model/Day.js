@@ -1,15 +1,17 @@
-import DateValidtor from '../validator/DateValidator.js';
+import { DATE } from '../constant/constants.js';
 
 class Day {
   #date;
 
   constructor(date) {
-    DateValidtor.validateDate(date);
+    this.#date = Number(date);
   }
 
-  getDate() {
-    const date = this.#date;
-    return date;
+  countChristmasdDay() {
+    if (this.#date <= DATE.christmas) {
+      return DATE.min - this.#date;
+    }
+    return 0;
   }
 }
 

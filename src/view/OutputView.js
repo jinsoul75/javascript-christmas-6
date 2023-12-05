@@ -26,6 +26,9 @@ const OutputView = {
     Console.print(HEADER.giftMenu);
     Console.print(LIST.giftMenu(totalOrderAmount));
   },
+  printDateEvent(event) {
+    Console.print(HEADER.benefit);
+  },
 };
 
 export default OutputView;

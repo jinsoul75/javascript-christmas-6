@@ -17,6 +17,7 @@ const MenuValidator = {
   validateQuantity(quantity) {
     this.checkHasNotInRange(quantity);
     this.checkTotalQuantity(quantity);
+    this.checkHasNotNumber(quantity);
   },
 
   checkValidMenu(item) {
@@ -30,11 +31,19 @@ const MenuValidator = {
   },
 
   checkCategory(item) {
-    const isOnlyDrink = menu => MENU[menu].category === 'drink';
+    const isOnlyDrink = menu => MENU[menu].category === ERROR.notOnlyCategory;
 
     if (item.every(isOnlyDrink)) {
-      throw new CustomError(ERROR.onlyDrink);
+      throw new CustomError(ERROR.inValidMenu);
     }
+  },
+
+  checkHasNotNumber(quantity) {
+    quantity.forEach(number => {
+      if (this.isNotNumber(number)) {
+        throw new CustomError(ERROR.inValidMenu);
+      }
+    });
   },
 
   checkHasNotInRange(quantity) {
@@ -54,6 +63,8 @@ const MenuValidator = {
 
   isNotInRage: number =>
     number < ORDER_QUANTITY.min || number > ORDER_QUANTITY.max,
+
+  isNotNumber: number => Number.isNaN(number),
 };
 
 export default MenuValidator;
