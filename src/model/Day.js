@@ -1,13 +1,15 @@
 import DateValidtor from '../validator/DateValidator.js';
 
-class Date {
+class Day {
   #date;
 
   constructor(date) {
     DateValidtor.validateDate(date);
   }
 
-  
+  getDate() {
+    return this.#date;
+  }
 }
 
-export default Date;
+export default Day;
