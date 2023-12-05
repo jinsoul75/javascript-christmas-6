@@ -23,7 +23,10 @@ class EventPlannerController {
     OutputView.printOrderMenu(menu.getMenu());
     OutputView.printTotalOrderAmount(menu.getTotalOrderAmount());
     OutputView.printGiftMenu(menu.getTotalOrderAmount());
-    OutputView.printDateEvent(this.#getDateEvent(menu));
+    OutputView.printDateEvent(
+      menu.getTotalOrderAmount(),
+      this.#getDateEvent(menu),
+    );
   }
 
   #getDateEvent(menu) {

@@ -19,17 +19,26 @@ export const HEADER = {
   totalOrderAmount: '\n<할인 전 총주문 금액>',
   giftMenu: '\n<증정 메뉴>',
   benefit: '\n<혜택 내역>',
+  totalBenefitAmount: '\n<총혜택 금액>',
+  expectedAmount: '\n<할인 후 예상 결제 금액>',
+  badge: '\n<12월 이벤트 배지>',
 };
 
 export const LIST = {
   menu: (item, quantity) => `${item} ${quantity}개`,
+
   totalOrderAmount: amount =>
     amount > AMOUNT.minEventAmount
       ? `${formatAmount(amount)} 원`
       : MESSAGE.informEventAmount,
+
   giftMenu: amount =>
     amount > AMOUNT.minGiftAmount
       ? `${GIFT.item} ${GIFT.quantity}개`
       : `${MESSAGE.nothing}`,
-  event: (name, amount) => `${name}: -${formatAmount(amount)}원`,
+
+  event: (totalOrderAmount, event) =>
+    totalOrderAmount >= AMOUNT.minEventAmount || event.length === 0
+      ? `${event[0]}: -${formatAmount(event[1])}원`
+      : MESSAGE.nothing,
 };
