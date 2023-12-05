@@ -16,7 +16,10 @@ export const AMOUNT = {
   minEventAmount: 10000,
   minGiftAmount: 120000,
   standarddDayEvent: 1000,
-  dDayEventUnit: 100,
+  dDayEventDiscountUnit: 100,
+  dayDiscount: 2023,
+  specialDiscount: 1000,
+  giftEvent: 25000,
 };
 
 export const GIFT = {
@@ -26,16 +29,8 @@ export const GIFT = {
 
 export const EVENT = {
   christmasdDay: '크리스마스 디데이 할인',
-  weekDay: '평일 할인',
+  weekday: '평일 할인',
   weekend: '주말 할인',
   special: '특별 할인',
   gift: '증정 이벤트',
 };
-
-export const EVENT_NAME = [
-  'christmasdDay',
-  'weekDay',
-  'weekend',
-  'special',
-  'gift',
-];

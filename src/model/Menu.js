@@ -1,5 +1,5 @@
 import MenuValidator from '../validator/MenuValidator.js';
-import { MENU } from '../constant/menu.js';
+import { CATEGORY, MENU } from '../constant/menu.js';
 
 class Menu {
   #menu;
@@ -36,6 +36,38 @@ class Menu {
       0,
     );
     return totalOrderAmount;
+  }
+
+  countDessert() {
+    const isDessert = menu => MENU[menu].category === CATEGORY.dessert;
+
+    return this.getMenu.find(isDessert).length;
+  }
+
+  getMainQuantity() {
+    const mainMenu = this.getMenu().filter(
+      item => MENU[item[0]].category === CATEGORY.main,
+    );
+
+    const totalMainQuantity = mainMenu.reduce(
+      (count, menu) => menu[1] + count,
+      0,
+    );
+
+    return totalMainQuantity;
+  }
+
+  getDessertQuantity() {
+    const dessertMenu = this.getMenu().filter(
+      item => MENU[item[0]].category === CATEGORY.dessert,
+    );
+
+    const totalDessertQuantity = dessertMenu.reduce(
+      (count, menu) => menu[1] + count,
+      0,
+    );
+
+    return totalDessertQuantity;
   }
 }
 

@@ -3,10 +3,13 @@ import { AMOUNT, EVENT } from '../constant/constants.js';
 class Event {
   #date;
 
+  #menu;
+
   #event;
 
-  constructor(date) {
+  constructor(date, menu) {
     this.#date = date;
+    this.#menu = menu;
   }
 
   getBenefit() {
@@ -16,16 +19,50 @@ class Event {
       this.#event.push(this.#getChristmasEvent());
     }
 
+    if (!this.#date.isWeekend() && this.#menu.getDessertQuantity()) {
+      this.#event.push(this.#getWeekdayEvent());
+    }
+
+    if (this.#date.isWeekend() && this.#menu.getMainQuantity()) {
+      this.#event.push(this.#getWeekendEvent());
+    }
+
+    if (this.#date.isSpecialDay()) {
+      this.#event.push(this.#getSpecialEvent());
+    }
+
+    if (this.#menu.getTotalOrderAmount() >= AMOUNT.minEventAmount) {
+      this.#event.push([EVENT.gift, AMOUNT.giftEvent]);
+    }
+
     return [...this.#event];
   }
 
   #getChristmasEvent() {
     const dDay = this.#date.countdDay();
 
-    const disCountAmount =
-      AMOUNT.standarddDayEvent + AMOUNT.dDayEventUnit * dDay;
+    const discountAmount =
+      AMOUNT.standarddDayEvent + AMOUNT.dDayEventDiscountUnit * dDay;
 
-    return [EVENT.christmasdDay, disCountAmount];
+    return [EVENT.christmasdDay, discountAmount];
+  }
+
+  #getWeekdayEvent() {
+    const discountAmount = AMOUNT.dayDiscount * this.#menu.getDessertQuantity();
+
+    return [EVENT.weekday, discountAmount];
+  }
+
+  #getWeekendEvent() {
+    const discountAmount = AMOUNT.dayDiscount * this.#menu.getMainQuantity();
+
+    return [EVENT.weekend, discountAmount];
+  }
+
+  #getSpecialEvent() {
+    const discountAmount = AMOUNT.specialDiscount;
+
+    return [EVENT.special, discountAmount];
   }
 }
 export default Event;

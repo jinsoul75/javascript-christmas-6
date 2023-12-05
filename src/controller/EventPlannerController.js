@@ -23,11 +23,11 @@ class EventPlannerController {
     OutputView.printOrderMenu(menu.getMenu());
     OutputView.printTotalOrderAmount(menu.getTotalOrderAmount());
     OutputView.printGiftMenu(menu.getTotalOrderAmount());
-    OutputView.printDateEvent(this.#getDateEvent());
+    OutputView.printDateEvent(this.#getDateEvent(menu));
   }
 
-  #getDateEvent() {
-    const event = new Event(this.#date);
+  #getDateEvent(menu) {
+    const event = new Event(this.#date, menu);
 
     return event.getBenefit();
   }

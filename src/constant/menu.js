@@ -49,4 +49,9 @@ export const MENU = {
   },
 };
 
-export const category = ['appetizer', 'main', 'dessert', 'drink'];
+export const CATEGORY = {
+  appetizer: 'appetizer',
+  main: 'main',
+  dessert: 'dessert',
+  drink: 'drink',
+};
