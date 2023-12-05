@@ -18,10 +18,14 @@ const OutputView = {
     Console.print(HEADER.orderMenu);
     menu.forEach(item => Console.print(LIST.menu(item[0], item[1])));
   },
-  printTotalOrderAmount(totalOrderAmount){
-    Console.print(HEADER.totalOrderAmount)
-    Console.print(LIST.totalOrderAmount(totalOrderAmount))
-  }
+  printTotalOrderAmount(totalOrderAmount) {
+    Console.print(HEADER.totalOrderAmount);
+    Console.print(LIST.totalOrderAmount(totalOrderAmount));
+  },
+  printGiftMenu(totalOrderAmount) {
+    Console.print(HEADER.giftMenu);
+    Console.print(LIST.giftMenu(totalOrderAmount));
+  },
 };
 
 export default OutputView;

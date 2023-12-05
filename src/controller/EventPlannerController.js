@@ -19,6 +19,7 @@ class EventPlannerController {
     OutputView.printEventHeader(date);
     OutputView.printOrderMenu(menu.getMenu());
     OutputView.printTotalOrderAmount(menu.getTotalOrderAmount());
+    OutputView.printGiftMenu(menu.getTotalOrderAmount());
   }
 
   async retryHandler(callback) {
