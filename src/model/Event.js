@@ -1,4 +1,6 @@
-import { AMOUNT, EVENT } from '../constant/constants.js';
+import { AMOUNT, EVENT, BADGE } from '../constant/constants.js';
+import { MESSAGE } from '../constant/message.js';
+import { CATEGORY } from '../constant/menu.js';
 
 class Event {
   #date;
@@ -14,7 +16,7 @@ class Event {
 
   getBenefit() {
     this.#event = [];
-    
+
     if (this.#date.isBeforeChristmas()) {
       this.#event.push(this.#getChristmasEvent());
     }
@@ -31,6 +33,7 @@ class Event {
       this.#event.push(this.#getSpecialEvent());
     }
 
+    // TODO: 분리하기
     if (this.#menu.getTotalOrderAmount() >= AMOUNT.minGiftAmount) {
       this.#event.push([EVENT.gift, AMOUNT.giftEvent]);
     }
@@ -41,20 +44,19 @@ class Event {
   #getChristmasEvent() {
     const dDay = this.#date.countdDay();
 
-    const discountAmount =
-      AMOUNT.standarddDayEvent + AMOUNT.dDayEventDiscountUnit * dDay;
+    const discountAmount = AMOUNT.standarddDayEvent + AMOUNT.dDayEventDiscountUnit * dDay;
 
     return [EVENT.christmasdDay, discountAmount];
   }
 
   #getWeekdayEvent() {
-    const discountAmount = AMOUNT.dayDiscount * this.#menu.getDessertQuantity();
+    const discountAmount = AMOUNT.dayDiscount * this.#menu.getCategoryQuantity(CATEGORY.dessert);
 
     return [EVENT.weekday, discountAmount];
   }
 
   #getWeekendEvent() {
-    const discountAmount = AMOUNT.dayDiscount * this.#menu.getMainQuantity();
+    const discountAmount = AMOUNT.dayDiscount * this.#menu.getCategoryQuantity(CATEGORY.main);
 
     return [EVENT.weekend, discountAmount];
   }
@@ -65,11 +67,9 @@ class Event {
     return [EVENT.special, discountAmount];
   }
 
+  // TODO: 할인금액 , 혜택금액 분리하기
   getTotalBenefitAmount() {
-    const totalBenefitAmount = this.#event.reduce(
-      (sumAmount, event) => sumAmount + event[1],
-      0,
-    );
+    const totalBenefitAmount = this.#event.reduce((sumAmount, event) => sumAmount + event[1], 0);
 
     return totalBenefitAmount;
   }
@@ -80,6 +80,19 @@ class Event {
     }
 
     return this.getTotalBenefitAmount();
+  }
+
+  getBadge(benefitAmount) {
+    if (benefitAmount < BADGE.star.price) {
+      return MESSAGE.nothing;
+    }
+    if (benefitAmount < BADGE.tree.price) {
+      return BADGE.star.name;
+    }
+    if (benefitAmount < BADGE.santa.price) {
+      return BADGE.tree.name;
+    }
+    return BADGE.santa.name;
   }
 }
 
