@@ -53,8 +53,7 @@ const MenuValidator = {
     }
   },
 
-  isNotInRage: number =>
-    number < ORDER_QUANTITY.min || number > ORDER_QUANTITY.max,
+  isNotInRage: number => number < ORDER_QUANTITY.min || number > ORDER_QUANTITY.max,
 
   isNotNumber: number => Number.isNaN(number),
 };

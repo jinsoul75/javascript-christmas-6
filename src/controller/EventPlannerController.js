@@ -23,7 +23,9 @@ class EventPlannerController {
 
     this.#printPreview(date, menu);
 
-    // this.#event(this.#date, this.#menu);
+    this.#event.applyEvent(this.#date, this.#menu);
+
+    this.#printBenefit();
   }
 
   #printPreview(date, menu) {
@@ -32,13 +34,13 @@ class EventPlannerController {
     OutputView.printTotalOrderAmount(this.#menu.getTotalOrderAmount());
   }
 
-  // #getBenefit({ date, menu }) {
-  //   OutputView.printGiftMenu(menu.getTotalOrderAmount());
-  //   OutputView.printDateEvent(menu.getTotalOrderAmount(), this.#event.getBenefit());
-  //   OutputView.printTotalBenefitAmount(this.#event.getTotalBenefitAmount());
-  //   OutputView.printExpectAmount(this.#event.getExpectAmount());
-  //   OutputView.printBadge(this.#event.getBadge(this.#event.getTotalBenefitAmount()));
-  // }
+  #printBenefit() {
+    OutputView.printGiftMenu(this.#event.getGift());
+    OutputView.printDateEvent(this.#menu.getTotalOrderAmount(), this.#event.getEvent());
+    OutputView.printTotalBenefitAmount(this.#event.getTotalBenefitAmount());
+    OutputView.printExpectAmount(this.#event.getExpectAmount(this.#menu.getTotalOrderAmount()));
+    OutputView.printBadge(this.#event.getBadge(this.#event.getTotalBenefitAmount()));
+  }
 
   async retryHandler(callback) {
     try {

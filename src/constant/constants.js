@@ -25,6 +25,7 @@ export const AMOUNT = {
 export const GIFT = {
   item: '샴페인',
   quantity: '1',
+  price: 25_000,
 };
 
 export const EVENT = {

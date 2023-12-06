@@ -1,85 +1,32 @@
-import { AMOUNT, EVENT, BADGE } from '../constant/constants.js';
+import { BADGE } from '../constant/constants.js';
 import { MESSAGE } from '../constant/message.js';
-import { CATEGORY } from '../constant/menu.js';
+
+import Gift from './Gift.js';
+import Discount from './Discount.js';
 
 class Event {
-  #date;
+  #gift;
 
-  #menu;
+  #discount;
 
-  #event;
-
-  constructor(date, menu) {
-    this.#date = date;
-    this.#menu = menu;
+  constructor() {
+    this.#gift = new Gift();
+    this.#discount = new Discount();
   }
 
-  getBenefit() {
-    this.#event = [];
-
-    if (this.#date.isBeforeChristmas()) {
-      this.#event.push(this.#getChristmasEvent());
-    }
-
-    if (!this.#date.isWeekend() && this.#menu.getDessertQuantity()) {
-      this.#event.push(this.#getWeekdayEvent());
-    }
-
-    if (this.#date.isWeekend() && this.#menu.getMainQuantity()) {
-      this.#event.push(this.#getWeekendEvent());
-    }
-
-    if (this.#date.isSpecialDay()) {
-      this.#event.push(this.#getSpecialEvent());
-    }
-
-    // TODO: 분리하기
-    if (this.#menu.getTotalOrderAmount() >= AMOUNT.minGiftAmount) {
-      this.#event.push([EVENT.gift, AMOUNT.giftEvent]);
-    }
-
-    return [...this.#event];
+  applyEvent(date, menu) {
+    this.#gift.apply(menu);
+    this.#discount.apply(date, menu);
   }
 
-  #getChristmasEvent() {
-    const dDay = this.#date.countdDay();
-
-    const discountAmount = AMOUNT.standarddDayEvent + AMOUNT.dDayEventDiscountUnit * dDay;
-
-    return [EVENT.christmasdDay, discountAmount];
-  }
-
-  #getWeekdayEvent() {
-    const discountAmount = AMOUNT.dayDiscount * this.#menu.getCategoryQuantity(CATEGORY.dessert);
-
-    return [EVENT.weekday, discountAmount];
-  }
-
-  #getWeekendEvent() {
-    const discountAmount = AMOUNT.dayDiscount * this.#menu.getCategoryQuantity(CATEGORY.main);
-
-    return [EVENT.weekend, discountAmount];
-  }
-
-  #getSpecialEvent() {
-    const discountAmount = AMOUNT.specialDiscount;
-
-    return [EVENT.special, discountAmount];
-  }
-
-  // TODO: 할인금액 , 혜택금액 분리하기
   getTotalBenefitAmount() {
-    const totalBenefitAmount = this.#event.reduce((sumAmount, event) => sumAmount + event[1], 0);
+    const totalBenefitAmount = this.#discount.getTotalDiscountAmount() + this.#gift.getAmount();
 
     return totalBenefitAmount;
   }
 
-  getExpectAmount() {
-    if (this.#menu.getTotalOrderAmount() >= AMOUNT.minGiftAmount) {
-      return this.getTotalBenefitAmount() - AMOUNT.giftEvent;
-    }
-
-    return this.getTotalBenefitAmount();
+  getExpectAmount(totalOrderAmount) {
+    return totalOrderAmount - this.#discount.getTotalDiscountAmount();
   }
 
   getBadge(benefitAmount) {
@@ -93,6 +40,14 @@ class Event {
       return BADGE.tree.name;
     }
     return BADGE.santa.name;
+  }
+
+  getGift() {
+    return this.#gift.getCount();
+  }
+
+  getEvent() {
+    return [...this.#discount.getAppliedDiscount(), ...this.#gift.getGift()];
   }
 }
 

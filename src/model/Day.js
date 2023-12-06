@@ -1,9 +1,11 @@
 import { DATE } from '../constant/constants.js';
+import DateValidator from '../validator/DateValidator.js';
 
 class Day {
   #date;
 
   constructor(date) {
+    DateValidator.validateDate(date);
     this.#date = Number(date);
   }
 
