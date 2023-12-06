@@ -36,5 +36,5 @@ export const LIST = {
 
   totalBenefit: amount => `${amount > 0 ? '-' : ''}${formatAmount(amount)}원`,
 
-  expectAmount: amount => `${amount}원`,
+  expectAmount: amount => `${formatAmount(amount)}원`,
 };
